@@ -1,11 +1,13 @@
 import css from "./Contact.module.css";
 import { BsTelephoneFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contacts/operations";
+// import { useDispatch } from "react-redux";
+// import { deleteContact } from "../../redux/contacts/operations";
+import MyModalDelete from "../MyModalDelete/MyModalDelete";
+import MyModalEdit from "../MyModalEdit/MyModalEdit";
 
 export default function Contact({ data: { id, name, number } }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   return (
     <div className={css.conteiner}>
       <div>
@@ -18,12 +20,16 @@ export default function Contact({ data: { id, name, number } }) {
           <p>{number}</p>
         </div>
       </div>
-      <button
+      {/* <button
         className={css.button}
         onClick={() => dispatch(deleteContact(id))}
       >
         Delete
-      </button>
+      </button> */}
+      <div className={css.wrapperModal}>
+        <MyModalDelete contactId={id} />
+        <MyModalEdit contactId={id} />
+      </div>
     </div>
   );
 }

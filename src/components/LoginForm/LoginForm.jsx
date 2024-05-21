@@ -5,6 +5,7 @@ import css from "./LoginForm.module.css";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
+import { TbLogin2 } from "react-icons/tb";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ export default function LoginForm() {
 
         <button className={css.button} type="submit">
           Log in
+          <TbLogin2 />
         </button>
       </Form>
     </Formik>

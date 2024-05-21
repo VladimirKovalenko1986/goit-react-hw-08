@@ -1,13 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import css from "./ContactForm.module.css";
+import css from "./ContactFormEdit.module.css";
 import { useId } from "react";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
-import { IoPersonAdd } from "react-icons/io5";
+import { patchContact } from "../../redux/contacts/operations";
+import { FaEdit } from "react-icons/fa";
 import toast from "react-hot-toast";
 
-export default function ContactForm() {
+export default function ContactFormEdit({ contactId, handleClose }) {
   const dispatch = useDispatch();
   const nameId = useId();
   const phoneNumberId = useId();
@@ -27,15 +27,16 @@ export default function ContactForm() {
   });
 
   const handleSubmit = (values, actions) => {
-    dispatch(addContact(values))
+    dispatch(patchContact({ contactId, updatedContact: values }))
       .unwrap()
       .then(() => {
-        toast.success("Add new contact");
+        toast.success("Edit contact all readi!!!");
       })
       .catch(() => {
-        toast.error("Please check the entered data!");
+        toast.error("No edit contact, try aegean");
       });
     actions.resetForm();
+    handleClose();
   };
 
   return (
@@ -46,13 +47,17 @@ export default function ContactForm() {
     >
       <Form className={css.form}>
         <div className={css.conteiner}>
-          <label htmlFor={nameId}>Name</label>
+          <label className={css.label} htmlFor={nameId}>
+            Name
+          </label>
           <Field className={css.input} type="text" name="name" id={nameId} />
           <ErrorMessage className={css.error} name="name" component="span" />
         </div>
 
         <div className={css.conteiner}>
-          <label htmlFor={phoneNumberId}>Number</label>
+          <label className={css.label} htmlFor={phoneNumberId}>
+            Number
+          </label>
           <Field
             className={css.input}
             type="tel"
@@ -63,8 +68,8 @@ export default function ContactForm() {
         </div>
         <div>
           <button type="submit" className={css.button}>
-            <IoPersonAdd className={css.icon} />
-            Add contact
+            <FaEdit className={css.icon} />
+            Edit contact
           </button>
         </div>
       </Form>

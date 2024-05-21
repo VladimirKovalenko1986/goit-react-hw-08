@@ -5,6 +5,7 @@ import css from "./RegistrationForm.module.css";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import toast from "react-hot-toast";
+import { FaCashRegister } from "react-icons/fa";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ export default function RegistrationForm() {
         <ErrorMessage className={css.error} name="password" component="span" />
 
         <button className={css.button} type="submit">
+          <FaCashRegister className={css.icon} />
           Register
         </button>
       </Form>
